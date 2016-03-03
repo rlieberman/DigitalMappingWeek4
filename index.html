@@ -1,0 +1,42 @@
+<!-- Link for map ids: https://www.mapbox.com/developers/api/maps/#mapids -->
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<style type="text/css">
+	body { margin:0; padding: 0;}
+	html, #map { position:absolute; top:0; bottom:0; width:100%;}
+	</style>
+	<title> Map with Custom Tiles!</title>
+	
+	<!-- Note that now we are adding in Mapbox.js instead of Leaflet.js -->
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+
+	<!-- Add Leaflet omnivore to pull in the CSV -->
+	 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+	
+	//Access token for mapbox
+	L.mapbox.accessToken = 'pk.eyJ1IjoicmViZWNjYWxpZWJlcm1hbiIsImEiOiJjaWtzaDFjd2kwZWs2dW1tMWRxdTJvNjlnIn0.qVybFKIyKSm8FhZiImj2NQ';
+
+	//CREATE BASEMAP with custom tiles
+	// L.mapbox.map('map', 'mapbox.streets-satellite') //change map styles here.  	
+	var map = L.mapbox.map('map', 'rebeccalieberman.ad238473') //replace set styles with your own 
+	.setView([40.766914, -73.977159], 12); // lat, long, zoom level
+
+	// Disable drag and zoom handlers.
+	map.scrollWheelZoom.disable();
+
+	//ADD THE DIRTY RESTAURANT DATA
+	omnivore.csv("data/dirtyrestaurants.csv").addTo(map); //syntax for adding a file to the map
+
+
+	</script>
+</body>
+</html>
