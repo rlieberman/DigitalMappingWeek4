@@ -12,6 +12,10 @@
 	<!-- Note that now we are adding in Mapbox.js instead of Leaflet.js -->
 	<script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+	
+	<!-- Add custom CSS -->
+	<link rel="stylesheet" type="text/css" href="dirtyrestaurants.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
 	<!-- Add Leaflet omnivore to pull in the CSV -->
 	 <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
@@ -19,7 +23,7 @@
 
 </head>
 <body>
-	<div id="map"></div>
+	<div class="custom-popup" id="map"></div>
 	<script>
 	
 	//Access token for mapbox
@@ -66,7 +70,10 @@
             //     }));
             // }
             // Bind a popup to each icon based on the same properties
-            marker.bindPopup(marker.toGeoJSON().properties.Name + "\n" + marker.toGeoJSON().properties.Address + 'Inspection Grade: C' + "\n" + 'Violation Description: ' + "\n" + marker.toGeoJSON().properties.ViolationDescription);
+            var name = marker.toGeoJSON().properties.Name; //way to add class to the name?
+            console.log(name);
+
+            marker.bindPopup(name + "<br/>" + marker.toGeoJSON().properties.Address + "<br/>" + "<br/>"  +'Inspection Grade: C' + "<br/>" + 'Violation Description: ' + "<br/>" + marker.toGeoJSON().properties.ViolationDescription);
         });
     })
     .addTo(map);
